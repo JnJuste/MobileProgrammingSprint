@@ -1,6 +1,6 @@
 # navigation_bar
 
-A new Flutter project.
+A Flutter project with navigation Bar, drawer with a calculator inside.
 
 ## Getting Started
 
