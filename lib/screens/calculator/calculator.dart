@@ -78,6 +78,7 @@ class _CalculatorState extends State<Calculator> {
             flex: 2,
             child: Container(
               child: GridView.builder(
+                shrinkWrap: true,
                 itemCount: buttons.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
@@ -190,7 +191,7 @@ class MyButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(7.0),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(25),
           child: Container(
               color: color,
               child: Center(
