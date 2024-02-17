@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_bar/screens/drawer/sideMenu.dart';
 
-class About extends StatefulWidget {
-  const About({Key? key}) : super(key: key);
+class Wifi extends StatefulWidget {
+  const Wifi({Key? key}) : super(key: key);
 
   @override
-  State<About> createState() => _AboutState();
+  State<Wifi> createState() => _AboutState();
 }
 
-class _AboutState extends State<About> {
+class _AboutState extends State<Wifi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: SideMenu(),
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
-        title: Text("About Us"),
+        title: Text("Wifi"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'ABOUT US',
+              'WIFI',
               style: TextStyle(fontSize: 40),
             ),
           ],

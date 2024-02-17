@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:navigation_bar/screens/about/about.dart';
+import 'package:navigation_bar/screens/wifi/wifi.dart';
 import 'package:navigation_bar/screens/calculator/calculator.dart';
 import 'package:navigation_bar/screens/help/help.dart';
 import 'package:navigation_bar/screens/home/home.dart';
@@ -33,7 +33,7 @@ class _FabBarState extends State<FabBar> {
   final List<Widget> pages = [
     Home(),
     Calculator(),
-    About(),
+    Wifi(),
     Help(),
   ];
 
@@ -46,7 +46,7 @@ class _FabBarState extends State<FabBar> {
         : currentIndex == 1
             ? Calculator()
             : currentIndex == 2
-                ? About()
+                ? Wifi()
                 : Help();
     return Scaffold(
       body: PageStorage(
@@ -130,7 +130,7 @@ class _FabBarState extends State<FabBar> {
                     minWidth: 90,
                     onPressed: () {
                       setState(() {
-                        currentScreen = About();
+                        currentScreen = Wifi();
                         currentIndex = 2;
                       });
                     },
@@ -138,13 +138,13 @@ class _FabBarState extends State<FabBar> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.info,
+                          Icons.wifi_outlined,
                           color: currentIndex == 2
                               ? Colors.blueAccent
                               : Colors.grey,
                         ),
                         Text(
-                          "About Us",
+                          "Wifi",
                           style: TextStyle(
                               color: currentIndex == 2
                                   ? Colors.blueAccent

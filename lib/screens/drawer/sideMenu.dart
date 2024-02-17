@@ -37,7 +37,7 @@ class _SideMenuState extends State<SideMenu> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.calculate),
+            leading: Icon(Icons.calculate_outlined),
             title: Text("Calculator"),
             onTap: () => {
               Navigator.pushReplacement(
@@ -47,8 +47,8 @@ class _SideMenuState extends State<SideMenu> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.info),
-            title: Text("About"),
+            leading: Icon(Icons.wifi_outlined),
+            title: Text("Wifi"),
             onTap: () => {
               Navigator.pushReplacement(
                   context,
