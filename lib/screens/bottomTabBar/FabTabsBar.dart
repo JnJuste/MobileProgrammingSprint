@@ -31,10 +31,10 @@ class _FabBarState extends State<FabBar> {
   }
 
   final List<Widget> pages = [
-    Home(),
-    Calculator(),
-    Wifi(),
-    Help(),
+    const Home(),
+    const Calculator(),
+    const Wifi(),
+    const Help(),
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();
@@ -42,12 +42,12 @@ class _FabBarState extends State<FabBar> {
   @override
   Widget build(BuildContext context) {
     Widget currentScreen = currentIndex == 0
-        ? Home()
+        ? const Home()
         : currentIndex == 1
-            ? Calculator()
+            ? const Calculator()
             : currentIndex == 2
-                ? Wifi()
-                : Help();
+                ? const Wifi()
+                : const Help();
     return Scaffold(
       body: PageStorage(
         child: currentScreen,
@@ -55,14 +55,16 @@ class _FabBarState extends State<FabBar> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange,
-        child: Icon(Icons.add),
-        onPressed: () {
-          print("Add Another Button");
-        },
+        child: const Icon(Icons.add),
+        onPressed: () => debugPrint("Add Button Pressed"),
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(width: 3, color: Colors.orange),
+          borderRadius: BorderRadius.circular(100),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         notchMargin: 10,
         child: Container(
           height: 60,
@@ -76,7 +78,7 @@ class _FabBarState extends State<FabBar> {
                     minWidth: 90,
                     onPressed: () {
                       setState(() {
-                        currentScreen = Home();
+                        currentScreen = const Home();
                         currentIndex = 0;
                       });
                     },
@@ -103,7 +105,7 @@ class _FabBarState extends State<FabBar> {
                     minWidth: 90,
                     onPressed: () {
                       setState(() {
-                        currentScreen = Calculator();
+                        currentScreen = const Calculator();
                         currentIndex = 1;
                       });
                     },
@@ -126,11 +128,12 @@ class _FabBarState extends State<FabBar> {
                       ],
                     ),
                   ),
+                  const SizedBox(width: 10),
                   MaterialButton(
                     minWidth: 90,
                     onPressed: () {
                       setState(() {
-                        currentScreen = Wifi();
+                        currentScreen = const Wifi();
                         currentIndex = 2;
                       });
                     },
@@ -157,7 +160,7 @@ class _FabBarState extends State<FabBar> {
                     minWidth: 90,
                     onPressed: () {
                       setState(() {
-                        currentScreen = Help();
+                        currentScreen = const Help();
                         currentIndex = 3;
                       });
                     },
@@ -165,7 +168,7 @@ class _FabBarState extends State<FabBar> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.info,
+                          Icons.help,
                           color: currentIndex == 3
                               ? Colors.greenAccent
                               : Colors.grey,

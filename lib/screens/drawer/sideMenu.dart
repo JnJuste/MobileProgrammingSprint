@@ -14,9 +14,7 @@ class _SideMenuState extends State<SideMenu> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
-            child: Text('Jn Juste',
-                style: TextStyle(color: Colors.white, fontSize: 25)),
+          const DrawerHeader(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(1.0),
@@ -25,6 +23,8 @@ class _SideMenuState extends State<SideMenu> {
                 color: Colors.white,
                 image: DecorationImage(
                     fit: BoxFit.fill, image: AssetImage('assets/burger.jpg'))),
+            child: Text('Jn Juste',
+                style: TextStyle(color: Colors.white, fontSize: 25)),
           ),
           ListTile(
             leading: Icon(Icons.home_filled),
