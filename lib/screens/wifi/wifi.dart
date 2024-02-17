@@ -1,6 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:navigation_bar/screens/drawer/sideMenu.dart';
+import 'package:navigation_bar/screens/drawer/drawer.dart';
 
 class Wifi extends StatefulWidget {
   const Wifi({Key? key}) : super(key: key);

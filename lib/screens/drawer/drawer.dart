@@ -10,21 +10,41 @@ class _SideMenuState extends State<SideMenu> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.green,
       child: ListView(
-        padding: EdgeInsets.zero,
+        padding: const EdgeInsets.only(top: 50.0),
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(1.0),
-                  bottomRight: Radius.circular(1.0),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 70),
+                height: 70,
+                width: 100,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: AssetImage('assets/profile.jpg'),
+                    fit: BoxFit.scaleDown,
+                  ),
                 ),
-                color: Colors.white,
-                image: DecorationImage(
-                    fit: BoxFit.fill, image: AssetImage('assets/burger.jpg'))),
-            child: Text('Jn Juste',
-                style: TextStyle(color: Colors.white, fontSize: 25)),
+              ),
+            ],
+          ),
+          const Center(
+            child: Text(
+              "Madman Tumultous",
+              style: TextStyle(color: Colors.white, fontSize: 25),
+            ),
+          ),
+          Center(
+            child: Text(
+              "info@madman.dev",
+              style: TextStyle(
+                color: Colors.grey[200],
+                fontSize: 15,
+              ),
+            ),
           ),
           ListTile(
             leading: Icon(Icons.home_filled),
