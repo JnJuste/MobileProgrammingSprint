@@ -1,6 +1,6 @@
 # navigBarDrawerFlutter
 
-A Flutter project with navigation Bar, drawer with a calculator inside.
+A Flutter project with Bottom Navigation Bar, Drawer, Shared Preferences(Dark, Light and System theme mode), Broadcast Receivers (Connectivity) with a calculator on a page.
 
 ## Getting Started
 
