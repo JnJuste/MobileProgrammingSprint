@@ -38,8 +38,7 @@ dependencies:
   math_expressions: ^2.4.0
   shared_preferences: ^2.2.2
   connectivity_plus: ^5.0.2
-  day_night_switch: ^1.0.4
-  animated_theme_switcher: ^2.0.10
+  provider: ^6.1.1
 
 dev_dependencies:
   flutter_test:

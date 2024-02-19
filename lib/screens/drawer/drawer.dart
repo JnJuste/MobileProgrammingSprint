@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_bar/screens/bottomTabBar/FabTabsBar.dart';
+import 'package:navigation_bar/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class SideMenu extends StatefulWidget {
   @override
@@ -10,7 +12,7 @@ class _SideMenuState extends State<SideMenu> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.blueGrey,
       child: ListView(
         padding: const EdgeInsets.only(top: 50.0),
         children: [
@@ -84,6 +86,68 @@ class _SideMenuState extends State<SideMenu> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => FabBar(selectedIndex: 3)))
+            },
+          ),
+
+          // DropdownButton as a trailing widget
+          Consumer<ThemeProvider>(
+            builder: (context, provider, child) {
+              return ListTile(
+                leading: Icon(Icons.nights_stay_rounded),
+                title: Text(
+                  'Theme:',
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                trailing: DropdownButton<String>(
+                  value: provider.currentTheme,
+                  icon: Icon(Icons.arrow_drop_down_circle_rounded),
+                  underline: Container(),
+                  onChanged: (String? value) {
+                    provider.changeTheme(value ?? 'system');
+                  },
+                  items: [
+                    DropdownMenuItem<String>(
+                      value: 'light',
+                      child: Row(
+                        children: [
+                          Icon(Icons.wb_sunny),
+                          SizedBox(width: 5),
+                          Text(
+                            'Light',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ],
+                      ),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'dark',
+                      child: Row(
+                        children: [
+                          const Icon(Icons.nightlight_round),
+                          SizedBox(width: 5),
+                          Text(
+                            'Dark',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ],
+                      ),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'system',
+                      child: Row(
+                        children: [
+                          Icon(Icons.settings),
+                          SizedBox(width: 5),
+                          Text(
+                            'System',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
             },
           ),
         ],

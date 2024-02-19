@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_bar/screens/drawer/drawer.dart';
+import 'package:navigation_bar/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,7 +17,7 @@ class _HomeState extends State<Home> {
       drawer: SideMenu(),
       appBar: AppBar(
         backgroundColor: Colors.pinkAccent,
-        title: Text("Home"),
+        title: const Text("Home"),
       ),
       body: Center(
         child: Column(
