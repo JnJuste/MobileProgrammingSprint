@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_bar/screens/bottomTabBar/FabTabsBar.dart';
-import 'package:navigation_bar/theme_provider.dart';
+import 'package:navigation_bar/screens/drawer/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class SideMenu extends StatefulWidget {
@@ -89,7 +89,7 @@ class _SideMenuState extends State<SideMenu> {
             },
           ),
 
-          // DropdownButton as a trailing widget
+          // DropdownButton as a trailing widget to enable Theme Mode(Light, Dark or System)
           Consumer<ThemeProvider>(
             builder: (context, provider, child) {
               return ListTile(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_bar/screens/bottomTabBar/FabTabsBar.dart';
-import 'package:navigation_bar/theme_provider.dart';
+import 'package:navigation_bar/screens/login/login.dart';
+import 'package:navigation_bar/screens/drawer/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         darkTheme: ThemeData.dark(),
         themeMode: provider.themeMode,
         home: FabBar(selectedIndex: 0),
+        //home: LoginPage(),
       );
     });
   }
