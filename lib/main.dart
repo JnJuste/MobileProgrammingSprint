@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:navigation_bar/screens/bottomTabBar/FabTabsBar.dart';
 import 'package:navigation_bar/screens/login/authPage.dart';
-import 'package:navigation_bar/screens/login/loginPage.dart';
 import 'package:navigation_bar/screens/drawer/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
