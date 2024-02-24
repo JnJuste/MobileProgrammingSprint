@@ -1,4 +1,5 @@
-# navigBarDrawerFlutter
+# MobileProgrammingSprint
+Flutter
 
 A Flutter project with Bottom Navigation Bar, Drawer, Shared Preferences(Dark, Light and System theme mode), Broadcast Receivers (Connectivity) with a calculator on a page.
 
