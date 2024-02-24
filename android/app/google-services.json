@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "876369163352",
+    "project_id": "navigationbar-1f81e",
+    "storage_bucket": "navigationbar-1f81e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876369163352:android:f5f4563f6ba7ac2212462d",
+        "android_client_info": {
+          "package_name": "com.example.navigation_bar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAF8BJV8N8ppFyyXoiGz6VLnmec1h_jb1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

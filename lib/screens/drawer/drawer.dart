@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation_bar/screens/bottomTabBar/FabTabsBar.dart';
 import 'package:navigation_bar/screens/drawer/theme_provider.dart';
@@ -9,6 +10,12 @@ class SideMenu extends StatefulWidget {
 }
 
 class _SideMenuState extends State<SideMenu> {
+  final user = FirebaseAuth.instance.currentUser;
+  //Sign User out Method
+  void signUserOut() {
+    FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -39,15 +46,15 @@ class _SideMenuState extends State<SideMenu> {
               style: TextStyle(color: Colors.white, fontSize: 25),
             ),
           ),
+          // Email Show up
           Center(
             child: Text(
-              "info@madman.dev",
-              style: TextStyle(
-                color: Colors.grey[200],
-                fontSize: 15,
-              ),
+              user!.email!,
+              style: TextStyle(color: Colors.white, fontSize: 15),
             ),
           ),
+
+          //Sign Out
           ListTile(
             leading: Icon(Icons.home_filled),
             title: Text("Home"),
@@ -79,13 +86,24 @@ class _SideMenuState extends State<SideMenu> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.help),
-            title: Text("Help"),
+            leading: Icon(Icons.contact_page_outlined),
+            title: Text("Contact"),
             onTap: () => {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                       builder: (context) => FabBar(selectedIndex: 3)))
+            },
+          ),
+
+          // Sign Out ListTile
+          ListTile(
+            leading: Icon(Icons.logout),
+            title: Text("Logout"),
+            onTap: () {
+              // Call the signUserOut method when tapped
+              signUserOut();
+              // Optionally, navigate to login or wherever after signing out
             },
           ),
 

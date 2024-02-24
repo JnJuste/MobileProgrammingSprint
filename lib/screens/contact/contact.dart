@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_bar/screens/drawer/drawer.dart';
 
-class Help extends StatefulWidget {
-  const Help({super.key});
+class Contact extends StatefulWidget {
+  const Contact({super.key});
 
   @override
-  State<Help> createState() => _HelpState();
+  State<Contact> createState() => _HelpState();
 }
 
-class _HelpState extends State<Help> {
+class _HelpState extends State<Contact> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: SideMenu(),
       appBar: AppBar(
         backgroundColor: Colors.greenAccent,
-        title: Text("Help"),
+        title: Text("Contact"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'HELP',
+              'CONTACT',
               style: TextStyle(fontSize: 40),
             ),
           ],

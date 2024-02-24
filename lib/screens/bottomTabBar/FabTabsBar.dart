@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_bar/screens/wifi/wifi.dart';
 import 'package:navigation_bar/screens/calculator/calculator.dart';
-import 'package:navigation_bar/screens/help/help.dart';
+import 'package:navigation_bar/screens/contact/contact.dart';
 import 'package:navigation_bar/screens/home/home.dart';
 
 // ignore: must_be_immutable
@@ -34,7 +34,7 @@ class _FabBarState extends State<FabBar> {
     const Home(),
     const Calculator(),
     const Wifi(),
-    const Help(),
+    const Contact(),
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();
@@ -47,7 +47,7 @@ class _FabBarState extends State<FabBar> {
             ? const Calculator()
             : currentIndex == 2
                 ? const Wifi()
-                : const Help();
+                : const Contact();
     return Scaffold(
       body: PageStorage(
         child: currentScreen,
@@ -160,7 +160,7 @@ class _FabBarState extends State<FabBar> {
                     minWidth: 90,
                     onPressed: () {
                       setState(() {
-                        currentScreen = const Help();
+                        currentScreen = const Contact();
                         currentIndex = 3;
                       });
                     },
@@ -168,13 +168,13 @@ class _FabBarState extends State<FabBar> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.help,
+                          Icons.contact_page_outlined,
                           color: currentIndex == 3
                               ? Colors.greenAccent
                               : Colors.grey,
                         ),
                         Text(
-                          "Help",
+                          "Contact",
                           style: TextStyle(
                               color: currentIndex == 3
                                   ? Colors.greenAccent
