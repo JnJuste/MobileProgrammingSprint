@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:navigation_bar/screens/wifi/wifi.dart';
 import 'package:navigation_bar/screens/calculator/calculator.dart';
@@ -34,7 +35,7 @@ class _FabBarState extends State<FabBar> {
     const Home(),
     const Calculator(),
     const Wifi(),
-    const Contact(),
+    const ContactPage(),
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();
@@ -47,7 +48,7 @@ class _FabBarState extends State<FabBar> {
             ? const Calculator()
             : currentIndex == 2
                 ? const Wifi()
-                : const Contact();
+                : const ContactPage();
     return Scaffold(
       body: PageStorage(
         child: currentScreen,
@@ -160,7 +161,7 @@ class _FabBarState extends State<FabBar> {
                     minWidth: 90,
                     onPressed: () {
                       setState(() {
-                        currentScreen = const Contact();
+                        currentScreen = const ContactPage();
                         currentIndex = 3;
                       });
                     },
