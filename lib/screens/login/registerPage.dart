@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:navigation_bar/screens/login/authServices.dart';
 import 'package:navigation_bar/screens/login/myButton.dart';
 import 'package:navigation_bar/screens/login/squareTile.dart';
 import 'package:navigation_bar/screens/login/textField.dart';
@@ -170,15 +171,21 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 const SizedBox(height: 50),
                 //Continue With Google or Samsung sign In Button
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //Google Button
-                    SquareTile(imagePath: 'assets/google.png'),
+                    SquareTile(
+                      onTap: () => AuthService().signInWithGoogle(),
+                      imagePath: 'assets/google.png',
+                    ),
 
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     //Samsung Button
-                    SquareTile(imagePath: 'assets/samsung.png')
+                    SquareTile(
+                      onTap: () {},
+                      imagePath: 'assets/samsung.png',
+                    )
                   ],
                 ),
 
