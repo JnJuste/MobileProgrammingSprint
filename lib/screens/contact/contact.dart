@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:navigation_bar/screens/drawer/drawer.dart';
 import 'package:contacts_service/contacts_service.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class ContactPage extends StatefulWidget {
