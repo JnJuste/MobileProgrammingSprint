@@ -41,9 +41,6 @@ dependencies:
   provider: ^6.1.1
   firebase_core: ^2.25.4
   firebase_auth: ^4.17.4
-  google_sign_in: ^6.2.1
-  flutter_google_place_picker: "^0.0.1"
-  location: "^1.2.0"
 
 dev_dependencies:
   flutter_test:
