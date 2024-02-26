@@ -92,7 +92,7 @@ class _ContactPageState extends State<ContactPage> {
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontSize: 16,
-                      color: Colors.cyanAccent,
+                      color: Colors.blue,
                       fontFamily: "Poppins",
                       fontWeight: FontWeight.w500,
                     ),
@@ -101,7 +101,7 @@ class _ContactPageState extends State<ContactPage> {
                     contacts[index].phones![0].value!,
                     style: const TextStyle(
                       fontSize: 11,
-                      color: Color(0xffC4c4c4),
+                      color: Colors.black,
                       fontFamily: "Poppins",
                       fontWeight: FontWeight.w400,
                     ),

@@ -1,8 +1,12 @@
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation_bar/screens/bottomTabBar/FabTabsBar.dart';
 import 'package:navigation_bar/screens/drawer/theme_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class SideMenu extends StatefulWidget {
   @override
@@ -11,46 +15,67 @@ class SideMenu extends StatefulWidget {
 
 class _SideMenuState extends State<SideMenu> {
   final user = FirebaseAuth.instance.currentUser;
-  //Sign User out Method
-  void signUserOut() {
-    FirebaseAuth.instance.signOut();
+
+  // Google Sign Out
+  signUserOut() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    GoogleSignIn googleSignIn = GoogleSignIn();
+
+    // Sign out from Firebase
+    await auth.signOut();
+
+    // Disconnect Google Sign In
+    await googleSignIn.disconnect();
   }
+
+  Uint8List? _image;
+  File? selectedIMage;
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       backgroundColor: Colors.blueGrey,
       child: ListView(
-        padding: const EdgeInsets.only(top: 50.0),
+        padding: const EdgeInsets.only(top: 70.0),
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(bottom: 70),
-                height: 70,
-                width: 100,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage('assets/profile.jpg'),
-                    fit: BoxFit.scaleDown,
-                  ),
-                ),
-              ),
-            ],
+          // Image & Gallery Access
+          Center(
+            child: Stack(
+              children: [
+                _image != null
+                    ? CircleAvatar(
+                        radius: 80, backgroundImage: MemoryImage(_image!))
+                    : const CircleAvatar(
+                        radius: 80,
+                        backgroundImage: NetworkImage(
+                            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"),
+                      ),
+                Positioned(
+                    bottom: 0,
+                    left: 100,
+                    child: IconButton(
+                        onPressed: () {
+                          showImagePickerOption(context);
+                        },
+                        icon: const Icon(Icons.add_a_photo)))
+              ],
+            ),
           ),
-          const Center(
+
+          // For Username show Up
+          /*const Center(
             child: Text(
               "Madman Tumultous",
               style: TextStyle(color: Colors.white, fontSize: 25),
             ),
-          ),
+          ),*/
+
+          const SizedBox(height: 15),
           // Email Show up
           Center(
             child: Text(
-              user!.email!,
-              style: TextStyle(color: Colors.white, fontSize: 15),
+              "I am : ${user!.email!}",
+              style: const TextStyle(color: Colors.white, fontSize: 15),
             ),
           ),
 
@@ -171,5 +196,86 @@ class _SideMenuState extends State<SideMenu> {
         ],
       ),
     );
+  }
+
+  void showImagePickerOption(BuildContext context) {
+    showModalBottomSheet(
+        backgroundColor: Colors.blue[100],
+        context: context,
+        builder: (builder) {
+          return Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 4.5,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        _pickImageFromGallery();
+                      },
+                      child: const SizedBox(
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.image,
+                              size: 50,
+                            ),
+                            Text("Gallery")
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        _pickImageFromCamera();
+                      },
+                      child: const SizedBox(
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.camera_alt,
+                              size: 50,
+                            ),
+                            Text("Camera")
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  //Gallery
+  Future _pickImageFromGallery() async {
+    final returnImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (returnImage == null) return;
+    setState(() {
+      selectedIMage = File(returnImage.path);
+      _image = File(returnImage.path).readAsBytesSync();
+    });
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pop(); //close the model sheet
+  }
+
+  //Camera
+  Future _pickImageFromCamera() async {
+    final returnImage =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    if (returnImage == null) return;
+    setState(() {
+      selectedIMage = File(returnImage.path);
+      _image = File(returnImage.path).readAsBytesSync();
+    });
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pop();
   }
 }

@@ -181,11 +181,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
 
                     const SizedBox(width: 10),
+
                     //Samsung Button
-                    SquareTile(
+                    /*SquareTile(
                       onTap: () {},
                       imagePath: 'assets/samsung.png',
-                    )
+                    )*/
                   ],
                 ),
 

@@ -172,11 +172,13 @@ class _LoginPageState extends State<LoginPage> {
                     ),
 
                     const SizedBox(width: 10),
+
                     //Samsung Button
-                    SquareTile(
+
+                    /*SquareTile(
                       onTap: () {},
                       imagePath: 'assets/samsung.png',
-                    )
+                    )*/
                   ],
                 ),
 
