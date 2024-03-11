@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:navigation_bar/screens/admin/AdminDashboard.dart';
 import 'package:navigation_bar/screens/login/authPage.dart';
 import 'package:navigation_bar/utils/constants.dart';
 import 'package:navigation_bar/views/quizCategory.dart';
 
+// ignore: must_be_immutable
 class WelcomeScreen extends StatelessWidget {
   TextEditingController userNameController = TextEditingController();
   WelcomeScreen({super.key});

@@ -4,7 +4,6 @@ import 'package:navigation_bar/screens/login/authServices.dart';
 import 'package:navigation_bar/screens/login/myButton.dart';
 import 'package:navigation_bar/screens/login/squareTile.dart';
 import 'package:navigation_bar/screens/login/textField.dart';
-import 'package:get/get.dart';
 import 'package:navigation_bar/views/welcomeScreen.dart';
 
 class LoginPage extends StatefulWidget {
