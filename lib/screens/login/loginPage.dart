@@ -4,6 +4,8 @@ import 'package:navigation_bar/screens/login/authServices.dart';
 import 'package:navigation_bar/screens/login/myButton.dart';
 import 'package:navigation_bar/screens/login/squareTile.dart';
 import 'package:navigation_bar/screens/login/textField.dart';
+import 'package:get/get.dart';
+import 'package:navigation_bar/views/welcomeScreen.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
@@ -37,11 +39,17 @@ class _LoginPageState extends State<LoginPage> {
         email: emailController.text,
         password: passwordController.text,
       );
-      // Pop the loading circle
-      Navigator.pop(context);
+      // Check if the widget is still mounted before popping
+      if (mounted) {
+        // Pop the loading circle
+        Navigator.pop(context);
+      }
     } on FirebaseAuthException catch (e) {
-      // Pop the loading circle
-      Navigator.pop(context);
+      // Check if the widget is still mounted before popping
+      if (mounted) {
+        // Pop the loading circle
+        Navigator.pop(context);
+      }
 
       // Show error message
       showErrorMessage(e.code);
@@ -82,10 +90,10 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 50),
                 //Welcome back, We've been missing you!
-                Text(
-                  'Welcome back you\'ve been missed!',
+                const Text(
+                  'Dear Admin, Welcome back you\'ve been missed!',
                   style: TextStyle(
-                    color: Colors.grey[700],
+                    color: Colors.black,
                     fontSize: 16,
                   ),
                 ),
@@ -123,6 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 const SizedBox(height: 25),
+
                 //Sign In Button
 
                 MyButton(
@@ -130,7 +139,23 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: signInUser,
                 ),
 
-                const SizedBox(height: 50),
+                const SizedBox(height: 20),
+
+                // Button to go back home
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => WelcomeScreen()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green, // Change the color here
+                  ),
+                  child: Text('Go Back To Home Page'),
+                ),
+
+                const SizedBox(height: 15),
 
                 //Or continue with
                 Padding(

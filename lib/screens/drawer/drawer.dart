@@ -18,14 +18,18 @@ class _SideMenuState extends State<SideMenu> {
 
   // Google Sign Out
   signUserOut() async {
-    FirebaseAuth auth = FirebaseAuth.instance;
-    GoogleSignIn googleSignIn = GoogleSignIn();
+    try {
+      FirebaseAuth auth = FirebaseAuth.instance;
+      GoogleSignIn googleSignIn = GoogleSignIn();
 
-    // Sign out from Firebase
-    await auth.signOut();
+      // Sign out from Firebase
+      await auth.signOut();
 
-    // Disconnect Google Sign In
-    await googleSignIn.disconnect();
+      // Disconnect Google Sign In
+      await googleSignIn.disconnect();
+    } catch (e) {
+      print("Error during sign out: $e");
+    }
   }
 
   Uint8List? _image;
@@ -81,8 +85,8 @@ class _SideMenuState extends State<SideMenu> {
 
           //Sign Out
           ListTile(
-            leading: Icon(Icons.home_filled),
-            title: Text("Home"),
+            leading: Icon(Icons.dashboard),
+            title: Text("Dashboard"),
             onTap: () => {
               Navigator.pushReplacement(
                   context,
