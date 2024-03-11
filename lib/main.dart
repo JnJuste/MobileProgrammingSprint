@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:navigation_bar/screens/login/authPage.dart';
 import 'package:navigation_bar/screens/drawer/theme_provider.dart';
 import 'package:navigation_bar/views/welcomeScreen.dart';
 import 'package:provider/provider.dart';
