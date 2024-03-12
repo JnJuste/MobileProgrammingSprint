@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:navigation_bar/controllers/questionController.dart';
 import 'package:navigation_bar/screens/drawer/drawer.dart';
 
 class AdminDashboard extends StatefulWidget {
@@ -10,6 +11,7 @@ class AdminDashboard extends StatefulWidget {
 }
 
 class _AdminDashboardState extends State<AdminDashboard> {
+  final QuestionController questionController = Get.put(QuestionController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +25,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
         itemBuilder: (contex, index) {
           return Card(
             child: ListTile(
-              leading: Icon(Icons.question_answer),
+              leading: const Icon(Icons.question_answer),
               title: const Text("Title"),
               subtitle: const Text("Title"),
               trailing: IconButton(
@@ -63,7 +65,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
       textConfirm: "Create",
       textCancel: "Cancel",
       onConfirm: () {
-        print("Question Set has been created");
+        //print("Question Set has been created");
+        questionController.savedQuestionCategoryToSharedPreferences();
+        Get.back();
       },
     );
   }
