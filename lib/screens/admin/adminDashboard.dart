@@ -65,7 +65,6 @@ class _AdminDashboardState extends State<AdminDashboard> {
       textConfirm: "Create",
       textCancel: "Cancel",
       onConfirm: () {
-        //print("Question Set has been created");
         questionController.savedQuestionCategoryToSharedPreferences();
         Get.back();
       },
