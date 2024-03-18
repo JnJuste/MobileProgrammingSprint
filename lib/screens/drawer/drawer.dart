@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:navigation_bar/screens/bottomTabBar/FabTabsBar.dart';
+import 'package:navigation_bar/screens/bottomTabBar/fab_tabs_bar.dart';
 import 'package:navigation_bar/screens/drawer/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
@@ -67,36 +67,36 @@ class _SideMenuState extends State<SideMenu> {
           ),
 
           // For Username show Up
-          /*const Center(
+          Center(
             child: Text(
-              "Madman Tumultous",
-              style: TextStyle(color: Colors.white, fontSize: 25),
+              "${user!.displayName}",
+              style: const TextStyle(color: Colors.white, fontSize: 25),
             ),
-          ),*/
+          ),
 
           const SizedBox(height: 15),
           // Email Show up
           Center(
             child: Text(
-              "I am : ${user!.email!}",
+              user!.email!,
               style: const TextStyle(color: Colors.white, fontSize: 15),
             ),
           ),
 
           //Sign Out
           ListTile(
-            leading: Icon(Icons.dashboard),
+            leading: const Icon(Icons.dashboard),
             title: Text("Dashboard"),
             onTap: () => {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => FabBar(selectedIndex: 0)))
+                      builder: (context) => const FabBar(selectedIndex: 0)))
             },
           ),
           ListTile(
-            leading: Icon(Icons.calculate_outlined),
-            title: Text("Calculator"),
+            leading: Icon(Icons.wifi_outlined),
+            title: Text("Wifi"),
             onTap: () => {
               Navigator.pushReplacement(
                   context,
@@ -105,8 +105,8 @@ class _SideMenuState extends State<SideMenu> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.wifi_outlined),
-            title: Text("Wifi"),
+            leading: Icon(Icons.calculate_outlined),
+            title: Text("Calculator"),
             onTap: () => {
               Navigator.pushReplacement(
                   context,

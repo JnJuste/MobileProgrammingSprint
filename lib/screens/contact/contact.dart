@@ -1,7 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:navigation_bar/screens/drawer/drawer.dart';
 import 'package:contacts_service/contacts_service.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class ContactPage extends StatefulWidget {
@@ -16,11 +18,20 @@ class _ContactPageState extends State<ContactPage> {
 
   bool isLoading = true;
 
+  //Internet Connectivity
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getContactPermission();
+    InternetConnectionChecker().onStatusChange.listen((status) {
+      final connected = status == InternetConnectionStatus.connected;
+      showSimpleNotification(
+          Text(
+            connected ? "CONNECTED TO INTERNET!" : "NO INTERNET!",
+            textAlign: TextAlign.center,
+          ),
+          background: connected ? Colors.green : Colors.red);
+    });
   }
 
   void getContactPermission() async {
@@ -91,7 +102,7 @@ class _ContactPageState extends State<ContactPage> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 20,
                       color: Colors.blue,
                       fontFamily: "Poppins",
                       fontWeight: FontWeight.w500,
@@ -100,8 +111,8 @@ class _ContactPageState extends State<ContactPage> {
                   subtitle: Text(
                     contacts[index].phones![0].value!,
                     style: const TextStyle(
-                      fontSize: 11,
-                      color: Colors.black,
+                      fontSize: 15,
+                      color: Colors.blueGrey,
                       fontFamily: "Poppins",
                       fontWeight: FontWeight.w400,
                     ),

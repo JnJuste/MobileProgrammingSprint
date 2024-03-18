@@ -36,7 +36,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   math_expressions: ^2.4.0
-  shared_preferences: ^2.2.2
   connectivity_plus: ^5.0.2
   provider: ^6.1.1
   firebase_core: ^2.25.4
@@ -46,8 +45,13 @@ dependencies:
   permission_handler: ^11.3.0
   flutter_screenutil: ^5.9.0
   image_picker: ^1.0.7
-  get: ^4.6.6
-  flutter_svg: ^2.0.10+1
+  shared_preferences: ^2.2.2
+  internet_connection_checker: ^1.0.0+1
+  overlay_support: ^2.1.0
+  random_string: ^2.3.1
+  cached_network_image: ^3.3.1
+  cloud_firestore: ^4.15.8
+  
 
 dev_dependencies:
   flutter_test:
@@ -77,9 +81,11 @@ flutter:
     - assets/profile.jpg
     - assets/google.png
     - assets/samsung.png
-    - assets/bg.svg
-    - assets/clock.svg
-
+    - assets/balloon2.png
+    - assets/balloon.png
+    - assets/main.png
+    - assets/ideas.png
+    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

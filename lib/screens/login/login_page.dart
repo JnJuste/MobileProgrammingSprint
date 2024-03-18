@@ -1,28 +1,45 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:navigation_bar/screens/login/authServices.dart';
-import 'package:navigation_bar/screens/login/myButton.dart';
-import 'package:navigation_bar/screens/login/squareTile.dart';
-import 'package:navigation_bar/screens/login/textField.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:navigation_bar/screens/login/auth_services.dart';
+import 'package:navigation_bar/screens/login/my_button.dart';
+import 'package:navigation_bar/screens/login/square_tile.dart';
+import 'package:navigation_bar/screens/login/text_field.dart';
+// ignore: unused_import
+import 'package:navigation_bar/services/internet_connectivity.dart';
+import 'package:overlay_support/overlay_support.dart';
 
-class RegisterPage extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   final Function()? onTap;
-  const RegisterPage({super.key, required this.onTap});
+  const LoginPage({super.key, required this.onTap});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _LoginPageState extends State<LoginPage> {
   // Text Editing Controller
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
 
-  final confirmPasswordController = TextEditingController();
+  //Internet Connectivity
+  @override
+  void initState() {
+    super.initState();
+    InternetConnectionChecker().onStatusChange.listen((status) {
+      final connected = status == InternetConnectionStatus.connected;
+      showSimpleNotification(
+          Text(
+            connected ? "CONNECTED TO INTERNET!" : "NO INTERNET!",
+            textAlign: TextAlign.center,
+          ),
+          background: connected ? Colors.green : Colors.red);
+    });
+  }
 
-  // Method to Sign Up
-  void signUserUp() async {
+  // Method to Sign In
+  void signInUser() async {
     // Show Loading Circle
     showDialog(
       context: context,
@@ -33,24 +50,23 @@ class _RegisterPageState extends State<RegisterPage> {
       },
     );
 
-    // Try Sign Creating User
+    // Try Sign In
     try {
-      // Check if password is confirmed
-      if (passwordController.text == confirmPasswordController.text) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text,
-        );
-      } else {
-        // Show error message, passwords don't match
-        showErrorMessage("Passwords don't match!");
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      // Check if the widget is still mounted before popping
+      if (mounted) {
+        // Pop the loading circle
+        Navigator.pop(context);
       }
-
-      // Pop the loading circle
-      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      // Pop the loading circle
-      Navigator.pop(context);
+      // Check if the widget is still mounted before popping
+      if (mounted) {
+        // Pop the loading circle
+        Navigator.pop(context);
+      }
 
       // Show error message
       showErrorMessage(e.code);
@@ -83,19 +99,16 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 25),
-
+                const SizedBox(height: 50),
                 //Logo Image
                 const Icon(
                   Icons.lock,
-                  size: 50,
+                  size: 100,
                 ),
-
-                const SizedBox(height: 25),
-
+                const SizedBox(height: 50),
                 //Welcome back, We've been missing you!
                 const Text(
-                  'Let\'s create an account for you!',
+                  'Dear Admin, Welcome back you\'ve been missed!',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
@@ -111,7 +124,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
 
                 const SizedBox(height: 10),
-
                 //Password TextField
 
                 MyTextField(
@@ -121,13 +133,18 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
 
                 const SizedBox(height: 10),
-
-                //Confirm Password TextField
-
-                MyTextField(
-                  controller: confirmPasswordController,
-                  hintText: 'Confirm Password',
-                  obscureText: true,
+                //Forgot Password?
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Forgot Password?',
+                        style: TextStyle(color: Colors.grey[600]),
+                      ),
+                    ],
+                  ),
                 ),
 
                 const SizedBox(height: 25),
@@ -135,11 +152,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 //Sign In Button
 
                 MyButton(
-                  text: "Sign Up",
-                  onTap: signUserUp,
+                  text: "Sign In",
+                  onTap: signInUser,
                 ),
 
-                const SizedBox(height: 50),
+                const SizedBox(height: 20),
+
+                const SizedBox(height: 15),
 
                 //Or continue with
                 Padding(
@@ -183,6 +202,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     const SizedBox(width: 10),
 
                     //Samsung Button
+
                     /*SquareTile(
                       onTap: () {},
                       imagePath: 'assets/samsung.png',
@@ -197,7 +217,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Already have an account?',
+                      'Not a member?',
                       style: TextStyle(
                         color: Colors.grey,
                         fontWeight: FontWeight.bold,
@@ -207,7 +227,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     GestureDetector(
                       onTap: widget.onTap,
                       child: const Text(
-                        'Login Now',
+                        'Register Now',
                         style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,

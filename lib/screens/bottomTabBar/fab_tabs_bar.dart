@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:navigation_bar/screens/admin/create_quiz.dart';
 import 'package:navigation_bar/screens/wifi/wifi.dart';
 import 'package:navigation_bar/screens/calculator/calculator.dart';
 import 'package:navigation_bar/screens/contact/contact.dart';
-import 'package:navigation_bar/screens/admin/adminDashboard.dart';
+import 'package:navigation_bar/screens/admin/admin_dashboard.dart';
 
 class FabBar extends StatefulWidget {
   final int selectedIndex;
 
-  const FabBar({Key? key, required this.selectedIndex}) : super(key: key);
+  const FabBar({super.key, required this.selectedIndex});
 
   @override
   _FabBarState createState() => _FabBarState();
@@ -27,27 +28,30 @@ class _FabBarState extends State<FabBar> {
     return Scaffold(
       body: IndexedStack(
         index: currentIndex,
-        children: [
-          const AdminDashboard(),
-          const Calculator(),
-          const Wifi(),
-          const ContactPage(),
+        children: const [
+          AdminDashboard(),
+          Wifi(),
+          Calculator(),
+          ContactPage(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange,
-        child: const Icon(Icons.add),
-        onPressed: () => debugPrint("Add Button Pressed"),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const CreateQuiz()));
+        },
         shape: RoundedRectangleBorder(
           side: const BorderSide(width: 3, color: Colors.orange),
           borderRadius: BorderRadius.circular(100),
         ),
+        child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 10,
-        child: Container(
+        child: SizedBox(
           height: 60,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -67,7 +71,7 @@ class _FabBarState extends State<FabBar> {
                     currentIndex = 1;
                   });
                 },
-                icon: Icon(Icons.calculate,
+                icon: Icon(Icons.wifi_outlined,
                     color: currentIndex == 1
                         ? Colors.deepOrangeAccent
                         : Colors.grey),
@@ -79,7 +83,7 @@ class _FabBarState extends State<FabBar> {
                     currentIndex = 2;
                   });
                 },
-                icon: Icon(Icons.wifi_outlined,
+                icon: Icon(Icons.calculate_outlined,
                     color: currentIndex == 2 ? Colors.blueAccent : Colors.grey),
               ),
               IconButton(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:navigation_bar/screens/drawer/drawer.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class Calculator extends StatefulWidget {
   const Calculator({Key? key}) : super(key: key);
@@ -10,6 +12,22 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
+  //Internet Connectivity
+  @override
+  void initState() {
+    super.initState();
+    InternetConnectionChecker().onStatusChange.listen((status) {
+      final connected = status == InternetConnectionStatus.connected;
+      showSimpleNotification(
+          Text(
+            connected ? "CONNECTED TO INTERNET!" : "NO INTERNET!",
+            textAlign: TextAlign.center,
+          ),
+          background: connected ? Colors.green : Colors.red);
+    });
+  }
+
+  //Calculator
   var userQuestion = ''; // User Input
   var userAnswer = ''; // User Answer
   final myTextStyle = TextStyle(fontSize: 30, color: Colors.deepPurple[900]);
