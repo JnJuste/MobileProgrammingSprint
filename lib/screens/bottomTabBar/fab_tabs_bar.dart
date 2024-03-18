@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_bar/screens/admin/create_quiz.dart';
-import 'package:navigation_bar/screens/wifi/wifi.dart';
+import 'package:navigation_bar/screens/geolocation/geolocation.dart';
 import 'package:navigation_bar/screens/calculator/calculator.dart';
 import 'package:navigation_bar/screens/contact/contact.dart';
 import 'package:navigation_bar/screens/admin/admin_dashboard.dart';
@@ -71,7 +71,7 @@ class _FabBarState extends State<FabBar> {
                     currentIndex = 1;
                   });
                 },
-                icon: Icon(Icons.wifi_outlined,
+                icon: Icon(Icons.location_on_outlined,
                     color: currentIndex == 1
                         ? Colors.deepOrangeAccent
                         : Colors.grey),

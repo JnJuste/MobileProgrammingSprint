@@ -86,7 +86,7 @@ class _SideMenuState extends State<SideMenu> {
           //Sign Out
           ListTile(
             leading: const Icon(Icons.dashboard),
-            title: Text("Dashboard"),
+            title: const Text("Dashboard"),
             onTap: () => {
               Navigator.pushReplacement(
                   context,
@@ -95,40 +95,40 @@ class _SideMenuState extends State<SideMenu> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.wifi_outlined),
-            title: Text("Wifi"),
+            leading: const Icon(Icons.location_on_outlined),
+            title: const Text("Geo Location"),
             onTap: () => {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => FabBar(selectedIndex: 1)))
+                      builder: (context) => const FabBar(selectedIndex: 1)))
             },
           ),
           ListTile(
-            leading: Icon(Icons.calculate_outlined),
-            title: Text("Calculator"),
+            leading: const Icon(Icons.calculate_outlined),
+            title: const Text("Calculator"),
             onTap: () => {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => FabBar(selectedIndex: 2)))
+                      builder: (context) => const FabBar(selectedIndex: 2)))
             },
           ),
           ListTile(
-            leading: Icon(Icons.contact_page_outlined),
-            title: Text("Contact"),
+            leading: const Icon(Icons.contact_page_outlined),
+            title: const Text("Contact"),
             onTap: () => {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => FabBar(selectedIndex: 3)))
+                      builder: (context) => const FabBar(selectedIndex: 3)))
             },
           ),
 
           // Sign Out ListTile
           ListTile(
-            leading: Icon(Icons.logout),
-            title: Text("Logout"),
+            leading: const Icon(Icons.logout),
+            title: const Text("Logout"),
             onTap: () {
               // Call the signUserOut method when tapped
               signUserOut();
@@ -140,14 +140,14 @@ class _SideMenuState extends State<SideMenu> {
           Consumer<ThemeProvider>(
             builder: (context, provider, child) {
               return ListTile(
-                leading: Icon(Icons.nights_stay_rounded),
+                leading: const Icon(Icons.nights_stay_rounded),
                 title: Text(
                   'Theme:',
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 trailing: DropdownButton<String>(
                   value: provider.currentTheme,
-                  icon: Icon(Icons.arrow_drop_down_circle_rounded),
+                  icon: const Icon(Icons.arrow_drop_down_circle_rounded),
                   underline: Container(),
                   onChanged: (String? value) {
                     provider.changeTheme(value ?? 'system');
@@ -157,8 +157,8 @@ class _SideMenuState extends State<SideMenu> {
                       value: 'light',
                       child: Row(
                         children: [
-                          Icon(Icons.wb_sunny),
-                          SizedBox(width: 5),
+                          const Icon(Icons.wb_sunny),
+                          const SizedBox(width: 5),
                           Text(
                             'Light',
                             style: Theme.of(context).textTheme.headline6,
@@ -171,7 +171,7 @@ class _SideMenuState extends State<SideMenu> {
                       child: Row(
                         children: [
                           const Icon(Icons.nightlight_round),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text(
                             'Dark',
                             style: Theme.of(context).textTheme.headline6,
@@ -183,8 +183,8 @@ class _SideMenuState extends State<SideMenu> {
                       value: 'system',
                       child: Row(
                         children: [
-                          Icon(Icons.settings),
-                          SizedBox(width: 5),
+                          const Icon(Icons.settings),
+                          const SizedBox(width: 5),
                           Text(
                             'System',
                             style: Theme.of(context).textTheme.headline6,
