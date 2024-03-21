@@ -61,6 +61,7 @@ class _CalculatorState extends State<Calculator> {
       appBar: AppBar(
         backgroundColor: Colors.deepOrangeAccent,
         title: const Text("Calculator"),
+        centerTitle: true,
       ),
       backgroundColor: Colors.deepPurple[100],
       body: Column(

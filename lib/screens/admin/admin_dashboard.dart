@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:navigation_bar/screens/admin/play_quiz.dart';
 import 'package:navigation_bar/screens/drawer/drawer.dart';
 import 'package:navigation_bar/services/database.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -15,7 +16,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
 //Internet Connectivity
   @override
   void initState() {
-    databaseService.getQuizData().then((val) {
+    databaseService.getQuizzesData().then((val) {
       setState(() {
         quizStream = val;
       });
@@ -51,6 +52,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                       imageUrl: snapshot.data.docs[index]["quizImgUrl"],
                       desc: snapshot.data.docs[index]["quizDesc"],
                       title: snapshot.data.docs[index]["quizTitle"],
+                      quizid: snapshot.data.docs[index]["quizId"],
                     );
                   },
                 );
@@ -66,6 +68,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("Dashboard"),
+        centerTitle: true,
         elevation: 0.0,
         backgroundColor: Colors.pinkAccent,
       ),
@@ -78,59 +81,67 @@ class QuizTile extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String desc;
+  final String quizid;
 
   const QuizTile({
     Key? key,
     required this.imageUrl,
     required this.title,
     required this.desc,
+    required this.quizid,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      height: 150,
-      child: Stack(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.network(
-              imageUrl,
-              width: MediaQuery.of(context).size.width,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Container(
-            decoration: BoxDecoration(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => PlayQuiz(quizId: quizid)));
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        height: 150,
+        child: Stack(
+          children: [
+            ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              color: Colors.black26,
+              child: Image.network(
+                imageUrl,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.cover,
+              ),
             ),
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w500,
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.black26,
+              ),
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  desc,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
+                  const SizedBox(height: 6),
+                  Text(
+                    desc,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class Results extends StatefulWidget {
   final int total, correct, incorrect, notattempted;
@@ -9,6 +11,21 @@ class Results extends StatefulWidget {
 }
 
 class _ResultsState extends State<Results> {
+
+  //Internet Connectivity
+  @override
+  void initState() {
+    super.initState();
+    InternetConnectionChecker().onStatusChange.listen((status) {
+      final connected = status == InternetConnectionStatus.connected;
+      showSimpleNotification(
+          Text(
+            connected ? "CONNECTED TO INTERNET!" : "NO INTERNET!",
+            textAlign: TextAlign.center,
+          ),
+          background: connected ? Colors.green : Colors.red);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

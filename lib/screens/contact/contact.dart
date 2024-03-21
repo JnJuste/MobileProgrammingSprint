@@ -57,6 +57,7 @@ class _ContactPageState extends State<ContactPage> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: const Text("Contact"),
+        centerTitle: true,
       ),
       body: isLoading
           ? const Center(

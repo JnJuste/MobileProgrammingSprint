@@ -72,9 +72,7 @@ class _FabBarState extends State<FabBar> {
                   });
                 },
                 icon: Icon(Icons.location_on_outlined,
-                    color: currentIndex == 1
-                        ? Colors.deepOrangeAccent
-                        : Colors.grey),
+                    color: currentIndex == 1 ? Colors.blueAccent : Colors.grey),
               ),
               const SizedBox(width: 10),
               IconButton(
@@ -84,7 +82,8 @@ class _FabBarState extends State<FabBar> {
                   });
                 },
                 icon: Icon(Icons.calculate_outlined,
-                    color: currentIndex == 2 ? Colors.blueAccent : Colors.grey),
+                    color:
+                        currentIndex == 2 ? Colors.orangeAccent : Colors.grey),
               ),
               IconButton(
                 onPressed: () {
