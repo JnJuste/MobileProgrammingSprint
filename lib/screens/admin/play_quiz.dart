@@ -55,29 +55,27 @@ class _PlayQuizState extends State<PlayQuiz> {
   QuestionModel getQuestionModelFromDataSnapshot(DocumentSnapshot questionSnapshot) {
   QuestionModel questionModel = new QuestionModel();
 
-  if (questionSnapshot.data != null) {
-    Map<String, dynamic> data = questionSnapshot.data() as Map<String, dynamic>;
-    questionModel.question = data["question"];
+  Map<String, dynamic> data = questionSnapshot.data() as Map<String, dynamic>;
+  questionModel.question = data["question"];
 
-    /// shuffling the options
-    List<String> options = [
-      data["option1"],
-      data["option2"],
-      data["option3"],
-      data["option4"]
-    ];
-    options.shuffle();
+  /// shuffling the options
+  List<String> options = [
+    data["option1"],
+    data["option2"],
+    data["option3"],
+    data["option4"]
+  ];
+  options.shuffle();
 
-    questionModel.option1 = options[0];
-    questionModel.option2 = options[1];
-    questionModel.option3 = options[2];
-    questionModel.option4 = options[3];
-    questionModel.correctOption = options[0]; // Set the correct option to the first shuffled option
+  questionModel.option1 = options[0];
+  questionModel.option2 = options[1];
+  questionModel.option3 = options[2];
+  questionModel.option4 = options[3];
+  questionModel.correctOption = options[0]; // Set the correct option to the first shuffled option
 
-    questionModel.answered = false;
+  questionModel.answered = false;
 
-    print(questionModel.correctOption.toLowerCase());
-  }
+  print(questionModel.correctOption.toLowerCase());
 
   return questionModel;
 }
