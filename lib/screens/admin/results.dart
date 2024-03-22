@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:navigation_bar/views/widgets.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 class Results extends StatefulWidget {
-  final int total, correct, incorrect, notattempted;
-  Results({required this.incorrect, required this.total, required this.correct, required this.notattempted});
+  final int total, correct, inCorrect, notattempted;
+  Results(
+      {required this.inCorrect,
+      required this.total,
+      required this.correct,
+      required this.notattempted});
 
   @override
   _ResultsState createState() => _ResultsState();
 }
 
 class _ResultsState extends State<Results> {
-
   //Internet Connectivity
   @override
   void initState() {
@@ -26,38 +30,39 @@ class _ResultsState extends State<Results> {
           background: connected ? Colors.green : Colors.red);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: MediaQuery.of(context).size.height,
         child: Center(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            Text("${widget.correct}/ ${widget.total}", style: TextStyle(fontSize: 25),),
-              SizedBox(height: 5,),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 24),
-                child: Text(
-                    "you answered ${widget.correct} answers correctly and ${widget.incorrect} answeres incorrectly",
-                textAlign: TextAlign.center,),
-
+              Text(
+                "${widget.correct}/${widget.total}",
+                style: const TextStyle(fontSize: 25),
               ),
-              SizedBox(height: 24,),
+              const SizedBox(height: 8),
+              Text(
+                "You answered ${widget.correct} answers correctly"
+                " and ${widget.inCorrect} answers incorrectly.",
+                style: const TextStyle(fontSize: 15, color: Colors.grey),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 14),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.pop(context);
                 },
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(30)
-                  ),
-                  child: Text("Go to home", style: TextStyle(color: Colors.white, fontSize: 19),),
-                ),
-              )
-          ],),
+                child: blueButton(
+                    context: context,
+                    label: "Go Home",
+                    buttonWidth: MediaQuery.of(context).size.width / 2),
+              ),
+            ],
+          ),
         ),
       ),
     );

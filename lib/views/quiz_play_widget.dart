@@ -30,12 +30,16 @@ class _OptionTileState extends State<OptionTile> {
           background: connected ? Colors.green : Colors.red);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
           Container(
+            width: 28,
+            height: 28,
             decoration: BoxDecoration(
               border: Border.all(
                 color: widget.description == widget.optionSelected
@@ -43,8 +47,11 @@ class _OptionTileState extends State<OptionTile> {
                         ? Colors.green.withOpacity(0.7)
                         : Colors.red.withOpacity(0.7)
                     : Colors.grey,
+                width: 1.4,
               ),
+              borderRadius: BorderRadius.circular(30),
             ),
+            alignment: Alignment.center,
             child: Text(
               "${widget.option}",
               style: TextStyle(
@@ -58,8 +65,56 @@ class _OptionTileState extends State<OptionTile> {
           const SizedBox(width: 8),
           Text(
             widget.description,
-            style: const TextStyle(fontSize: 17, color: Colors.black54),
+            style: const TextStyle(fontSize: 16, color: Colors.black54),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class NoOfQuestionTile extends StatefulWidget {
+  final String text;
+  final int number;
+
+  NoOfQuestionTile({required this.text, required this.number});
+
+  @override
+  _NoOfQuestionTileState createState() => _NoOfQuestionTileState();
+}
+
+class _NoOfQuestionTileState extends State<NoOfQuestionTile> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 3),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(14),
+                    bottomLeft: Radius.circular(14)),
+                color: Colors.blue),
+            child: Text(
+              "${widget.number}",
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(14),
+                  bottomRight: Radius.circular(14),
+                ),
+                color: Colors.black54),
+            child: Text(
+              widget.text,
+              style: const TextStyle(color: Colors.white),
+            ),
+          )
         ],
       ),
     );
