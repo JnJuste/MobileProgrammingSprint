@@ -23,6 +23,7 @@ class DatabaseService {
           .doc(quizId)
           .collection("QNA")
           .add(questionData)
+          // ignore: body_might_complete_normally_catch_error
           .catchError((e) {
         print("Error adding question data: $e");
       });
