@@ -35,32 +35,39 @@ class _ResultsState extends State<Results> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: MediaQuery.of(context).size.height,
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "${widget.correct}/${widget.total}",
+                "${widget.correct}/ ${widget.total}",
                 style: const TextStyle(fontSize: 25),
               ),
-              const SizedBox(height: 8),
-              Text(
-                "You answered ${widget.correct} answers correctly"
-                " and ${widget.inCorrect} answers incorrectly.",
-                style: const TextStyle(fontSize: 15, color: Colors.grey),
-                textAlign: TextAlign.center,
+              const SizedBox(height: 5),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Text(
+                  "You answered ${widget.correct} answers correctly and ${widget.inCorrect} answers incorrectly",
+                  textAlign: TextAlign.center,
+                ),
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 24),
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: blueButton(
-                    context: context,
-                    label: "Go Home",
-                    buttonWidth: MediaQuery.of(context).size.width / 2),
-              ),
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: const Text(
+                    "Go to home",
+                    style: TextStyle(color: Colors.white, fontSize: 19),
+                  ),
+                ),
+              )
             ],
           ),
         ),

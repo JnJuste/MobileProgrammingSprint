@@ -34,39 +34,43 @@ class _OptionTileState extends State<OptionTile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
         children: [
           Container(
-            width: 28,
             height: 28,
+            width: 28,
+            alignment: Alignment.center,
             decoration: BoxDecoration(
-              border: Border.all(
-                color: widget.description == widget.optionSelected
-                    ? widget.optionSelected == widget.correctAnswer
+                border: Border.all(
+                    color: widget.optionSelected == widget.description
+                        ? widget.description == widget.correctAnswer
+                            ? Colors.green.withOpacity(0.7)
+                            : Colors.red.withOpacity(0.7)
+                        : Colors.grey,
+                    width: 1.5),
+                color: widget.optionSelected == widget.description
+                    ? widget.description == widget.correctAnswer
                         ? Colors.green.withOpacity(0.7)
                         : Colors.red.withOpacity(0.7)
-                    : Colors.grey,
-                width: 1.4,
-              ),
-              borderRadius: BorderRadius.circular(30),
-            ),
-            alignment: Alignment.center,
+                    : Colors.white,
+                borderRadius: BorderRadius.circular(24)),
             child: Text(
-              "${widget.option}",
+              widget.option,
               style: TextStyle(
-                  color: widget.optionSelected == widget.description
-                      ? widget.correctAnswer == widget.optionSelected
-                          ? Colors.green.withOpacity(0.7)
-                          : Colors.red
-                      : Colors.grey),
+                color: widget.optionSelected == widget.description
+                    ? Colors.white
+                    : Colors.grey,
+              ),
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(
+            width: 8,
+          ),
           Text(
             widget.description,
-            style: const TextStyle(fontSize: 16, color: Colors.black54),
-          ),
+            style: const TextStyle(fontSize: 17, color: Colors.black54),
+          )
         ],
       ),
     );
@@ -94,8 +98,9 @@ class _NoOfQuestionTileState extends State<NoOfQuestionTile> {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(14),
-                    bottomLeft: Radius.circular(14)),
+                  topLeft: Radius.circular(14),
+                  bottomLeft: Radius.circular(14),
+                ),
                 color: Colors.blue),
             child: Text(
               "${widget.number}",

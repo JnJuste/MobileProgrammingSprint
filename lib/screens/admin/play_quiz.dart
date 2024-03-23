@@ -45,12 +45,11 @@ class _PlayQuizState extends State<PlayQuiz> {
       });
     });
 
-    if (infoStream == null) {
-      infoStream = Stream<List<int>>.periodic(Duration(milliseconds: 100), (x) {
-        print("this is x $x");
-        return [_correct, _incorrect];
-      });
-    }
+    infoStream ??=
+        Stream<List<int>>.periodic(const Duration(milliseconds: 100), (x) {
+      print("this is x $x");
+      return [_correct, _incorrect];
+    });
 
     InternetConnectionChecker().onStatusChange.listen((status) {
       final connected = status == InternetConnectionStatus.connected;
@@ -120,7 +119,7 @@ class _PlayQuizState extends State<PlayQuiz> {
                 : ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     itemCount: questionsSnapshot?.docs.length,
                     itemBuilder: (context, index) {
                       return QuizPlayTile(
@@ -137,21 +136,21 @@ class _PlayQuizState extends State<PlayQuiz> {
         child: const Icon(Icons.check),
         onPressed: () {
           Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Results(
-                        correct: _correct,
-                        inCorrect: _incorrect,
-                        total: total,
-                        notattempted: _notAttempted,
-                      )));
+            context,
+            MaterialPageRoute(
+              builder: (context) => Results(
+                correct: _correct,
+                inCorrect: _incorrect,
+                total: total,
+                notattempted: _notAttempted,
+              ),
+            ),
+          );
         },
       ),
     );
   }
 }
-
-
 
 class InfoHeader extends StatefulWidget {
   final int length;
@@ -166,41 +165,40 @@ class _InfoHeaderState extends State<InfoHeader> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: infoStream,
-        builder: (context, snapshot) {
-          return snapshot.hasData
-              ? Container(
-                  height: 40,
-                  margin: const EdgeInsets.only(left: 14),
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    children: <Widget>[
-                      NoOfQuestionTile(
-                        text: "Total",
-                        number: widget.length,
-                      ),
-                      NoOfQuestionTile(
-                        text: "Correct",
-                        number: _correct,
-                      ),
-                      NoOfQuestionTile(
-                        text: "Incorrect",
-                        number: _incorrect,
-                      ),
-                      NoOfQuestionTile(
-                        text: "NotAttempted",
-                        number: _notAttempted,
-                      ),
-                    ],
-                  ),
-                )
-              : Container();
-        },
-        );
+      stream: infoStream,
+      builder: (context, snapshot) {
+        return snapshot.hasData
+            ? Container(
+                height: 40,
+                margin: const EdgeInsets.only(left: 14),
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  children: <Widget>[
+                    NoOfQuestionTile(
+                      text: "Total",
+                      number: widget.length,
+                    ),
+                    NoOfQuestionTile(
+                      text: "Correct",
+                      number: _correct,
+                    ),
+                    NoOfQuestionTile(
+                      text: "Incorrect",
+                      number: _incorrect,
+                    ),
+                    NoOfQuestionTile(
+                      text: "NotAttempted",
+                      number: _notAttempted,
+                    ),
+                  ],
+                ),
+              )
+            : Container();
+      },
+    );
   }
 }
-
 
 class QuizPlayTile extends StatefulWidget {
   final QuestionModel questionModel;
