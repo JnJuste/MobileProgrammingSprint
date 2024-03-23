@@ -27,6 +27,7 @@ Stream<dynamic>? infoStream;
 class _PlayQuizState extends State<PlayQuiz> {
   DatabaseService databaseService = new DatabaseService();
   QuerySnapshot<Object?>? questionsSnapshot;
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -40,13 +41,15 @@ class _PlayQuizState extends State<PlayQuiz> {
         _notAttempted = 0;
         _correct = 0;
         _incorrect = 0;
+        isLoading = false;
         total = questionsSnapshot!.docs.length;
+
         print("init don $total ${widget.quizId} ");
       });
     });
 
     infoStream ??=
-        Stream<List<int>>.periodic(const Duration(milliseconds: 100), (x) {
+        Stream<List<int>>.periodic(const Duration(milliseconds: 10), (x) {
       print("this is x $x");
       return [_correct, _incorrect];
     });
@@ -102,36 +105,51 @@ class _PlayQuizState extends State<PlayQuiz> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: appBar(context),
+        title: appBar(
+            context), // assuming appBar is a function that returns a widget
+        centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         iconTheme: const IconThemeData(color: Colors.black87),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            questionsSnapshot == null
-                ? Container(
-                    child: const Center(
-                      child: CircularProgressIndicator(),
+      body: isLoading // assuming isLoading is a boolean variable
+          ? Container(
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
+          : SingleChildScrollView(
+              child: Container(
+                child: Column(
+                  children: [
+                    InfoHeader(
+                      length: questionsSnapshot?.docs.length ??
+                          0, // assuming questionsSnapshot is a variable
                     ),
-                  )
-                : ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    shrinkWrap: true,
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: questionsSnapshot?.docs.length,
-                    itemBuilder: (context, index) {
-                      return QuizPlayTile(
-                        questionModel: getQuestionModelFromDataSnapshot(
-                            questionsSnapshot!.docs[index]),
-                        index: index,
-                      );
-                    },
-                  ),
-          ],
-        ),
-      ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    questionsSnapshot == null
+                        ? Container(
+                            child: const Center(child: Text("No Data")),
+                          )
+                        : ListView.builder(
+                            padding: const EdgeInsets.symmetric(horizontal: 24),
+                            shrinkWrap: true,
+                            physics: const ClampingScrollPhysics(),
+                            itemCount: questionsSnapshot?.docs.length,
+                            itemBuilder: (context, index) {
+                              return QuizPlayTile(
+                                questionModel: getQuestionModelFromDataSnapshot(
+                                    questionsSnapshot!.docs[index]),
+                                index: index,
+                              );
+                            },
+                          ),
+                  ],
+                ),
+              ),
+            ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.check),
         onPressed: () {
@@ -188,7 +206,7 @@ class _InfoHeaderState extends State<InfoHeader> {
                       number: _incorrect,
                     ),
                     NoOfQuestionTile(
-                      text: "NotAttempted",
+                      text: "Not Attempted",
                       number: _notAttempted,
                     ),
                   ],

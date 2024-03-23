@@ -39,7 +39,7 @@ class _ResultsState extends State<Results> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "${widget.correct}/ ${widget.total}",
+                "${widget.correct} / ${widget.total}",
                 style: const TextStyle(fontSize: 25),
               ),
               const SizedBox(height: 5),
