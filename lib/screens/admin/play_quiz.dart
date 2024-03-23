@@ -105,14 +105,13 @@ class _PlayQuizState extends State<PlayQuiz> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: appBar(
-            context), // assuming appBar is a function that returns a widget
+        title: appBar(context),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         iconTheme: const IconThemeData(color: Colors.black87),
       ),
-      body: isLoading // assuming isLoading is a boolean variable
+      body: isLoading
           ? Container(
               child: const Center(
                 child: CircularProgressIndicator(),
@@ -122,10 +121,7 @@ class _PlayQuizState extends State<PlayQuiz> {
               child: Container(
                 child: Column(
                   children: [
-                    InfoHeader(
-                      length: questionsSnapshot?.docs.length ??
-                          0, // assuming questionsSnapshot is a variable
-                    ),
+                    InfoHeader(length: questionsSnapshot?.docs.length ?? 0),
                     const SizedBox(
                       height: 10,
                     ),
