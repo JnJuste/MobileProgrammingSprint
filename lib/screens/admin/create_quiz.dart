@@ -51,7 +51,7 @@ class _CreateQuizState extends State<CreateQuiz> {
         title: appBar(context),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        iconTheme: const IconThemeData(color: Colors.black87),
+        //iconTheme: const IconThemeData(color: Colors.black87),
       ),
       body: _isLoading
           ? Container(
@@ -98,11 +98,11 @@ class _CreateQuizState extends State<CreateQuiz> {
                     ),
                     const Spacer(),
                     GestureDetector(
-                        onTap: () {
-                          createQuizOnline();
-                        },
-                        child:
-                            blueButton(context: context, label: "Create Quiz")),
+                      onTap: () {
+                        createQuizOnline();
+                      },
+                      child: blueButton(context: context, label: "Create Quiz"),
+                    ),
                     const SizedBox(height: 60),
                   ],
                 ),

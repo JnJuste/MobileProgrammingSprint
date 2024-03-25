@@ -72,7 +72,7 @@ class _PlayQuizState extends State<PlayQuiz> {
     Map<String, dynamic> data = questionSnapshot.data() as Map<String, dynamic>;
     questionModel.question = data["question"];
 
-    /// shuffling the options
+    // Shuffling the options of the question
     List<String> options = [
       data["option1"],
       data["option2"],
@@ -107,9 +107,9 @@ class _PlayQuizState extends State<PlayQuiz> {
       appBar: AppBar(
         title: appBar(context),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        //backgroundColor: Colors.transparent,
         elevation: 0.0,
-        iconTheme: const IconThemeData(color: Colors.black87),
+        //iconTheme: const IconThemeData(color: Colors.black87),
       ),
       body: isLoading
           ? Container(

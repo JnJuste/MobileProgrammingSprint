@@ -50,7 +50,8 @@ dependencies:
   random_string: ^2.3.1
   cached_network_image: ^3.3.1
   cloud_firestore: ^4.15.8
-  
+  geolocator: ^11.0.0
+  geocoding: ^3.0.0
 
 dev_dependencies:
   flutter_test:

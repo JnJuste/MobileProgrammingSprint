@@ -30,7 +30,7 @@ class _FabBarState extends State<FabBar> {
         index: currentIndex,
         children: const [
           AdminDashboard(),
-          Wifi(),
+          GeoLocation(),
           Calculator(),
           ContactPage(),
         ],
